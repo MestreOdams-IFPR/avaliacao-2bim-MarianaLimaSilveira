@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Vector;
 
 public class TesteDeForca {
 
@@ -39,13 +38,30 @@ public class TesteDeForca {
                 }while(i<=j && vetor[j] < pivo);
 
                 if(i<=j){
-                    swap(vetor, i, j)
+                    swap(vetor, i, j);
                 }
-            }
+            }while(i<j);
+
+            vetor[fim] = vetor [i];
+            vetor[i] = pivo;
+            quick2(vetor, inicio, i-1);
+            quick2(vetor, i+1, fim);
         }
 
     }
-    public static void main(String[] args) {*.
+   
+    public static int determinarForçaMinima(int[] pontuacoes, int vagas){
+        int[]ordenado = quickSort(pontuacoes);
+        int forcaMinima = 0;
+
+        for(int k = (pontuacoes.length-1) - vagas; k < ordenado.length;k++){
+            forcaMinima += pontuacoes[k];
+        }
+
+        return forcaMinima;
+    }
+
+    public static void main(String[] args){
 
         while(teclado.hasNext()){
 
@@ -57,8 +73,11 @@ public class TesteDeForca {
             for(int i = 0;i < qntParticipantes;i++){
     
                 pontuacoes[i] = teclado.nextInt();
-    
+
             }
+
+            System.out.println(determinarForçaMinima(pontuacoes, qntVagas));
+            System.out.println();
 
         }
         
